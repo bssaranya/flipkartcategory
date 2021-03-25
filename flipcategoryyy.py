@@ -14,7 +14,7 @@ main_categories = {}
 diclist = []
 maindiv = soup.select('._1GTrm1')
 
-
+url = 'https://www.flipkart.com/'
 
 for div in maindiv:
     for x in div.select('._2oyLgr'):
@@ -27,17 +27,19 @@ for div in maindiv:
     for x in div.select('._3CuAg8'):
         products = []
         productlink = x.attrs['href']
-        products.append(productlink)
+        full_link = url + str(productlink)
+        products.append(full_link)
         # print(products)
+
 
         main_categories={
             'head':head,
-            'productlink':productlink
+            'productlink':full_link
         }
         diclist.append(main_categories)
         print(main_categories)
 
 
 json_text = json.dumps(diclist,indent=4)
-with open('flipkartcategory2.json', 'w') as json_file:
+with open('flipkartcategory.json', 'w') as json_file:
     json_file.write(json_text)
